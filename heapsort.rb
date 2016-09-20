@@ -1,6 +1,7 @@
 require 'benchmark'
 
-def heapsort(array,count)
+def heapsort(array)
+  count = array.length
   new_array = heapify(array,count)
   end_point = count - 1
   while end_point > 0 do
@@ -46,5 +47,5 @@ end
 list = Array.new(1000000).map{|i| rand(1000)}
 
 Benchmark.bmbm do |x|
-	x.report('heapsort') { heapsort(list,5000) }
+	x.report('heapsort') { heapsort(list) }
 end
