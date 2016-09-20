@@ -65,6 +65,29 @@ class LinkedList
     result
   end
 
+  def swap(node1,node2)
+    temp_prev1 = node1.prev
+    temp_next1 = node1.next
+    node1.next = node2.next
+    node1.next.prev = node1
+    node1.prev = node2.prev
+    node1.prev.next = node1
+    node2.next = temp_next1
+    node2.next.prev = node2
+    node2.prev = temp_prev1
+    node2.prev.next = node2
+  end
+
+  def count(value)
+    count = 0
+    test_node = @head
+    until test_node.next.value == nil
+      count += test_node.next.value == value ? 1 : 0
+      test_node = test_node.next
+    end
+    count
+  end
+
 end
 
 class LinkedListNode
