@@ -121,6 +121,27 @@ def parse_linked_list_digit(linked_list)
   count
 end
 
-linked_list1 = LinkedList.new.convert_array([7,1,6])
-linked_list2 = LinkedList.new.convert_array([5,9,2])
-p add_reversed_digits(linked_list1, linked_list2)
+# linked_list1 = LinkedList.new.convert_array([7,1,6])
+# linked_list2 = LinkedList.new.convert_array([5,9,2])
+# p add_reversed_digits(linked_list1, linked_list2)
+
+# implement a function to check if a linked list is a palindrome
+
+def palindrome_list(linked_list)
+  left_test = linked_list.head.next
+  right_test = linked_list.tail.prev
+  until left_test.value == nil
+    if left_test.value != right_test.value
+      return false
+    end
+    left_test = left_test.next
+    right_test = right_test.prev
+  end
+  true
+end
+#
+# linked_list = LinkedList.new.convert_array([1,3,5,7,5,3,1])
+# p palindrome_list(linked_list).to_s
+
+# given two singly linked lists, determine if the two lists intersect. return
+# the intersecting node.
