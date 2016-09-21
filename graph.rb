@@ -1,9 +1,13 @@
 class Vertex
-  attr_accessor :name, :neighbors
+  attr_accessor :value, :neighbors
 
   def initialize(value)
     @value = value
     @neighbors = []
+  end
+
+  def to_s
+    [@value]
   end
 end
 
@@ -25,16 +29,33 @@ class Graph
     nil
   end
 
-  def add_edge(start_val, end_val, undirected = true)
+  def add_edge(start_val, end_val, directed = true)
     from = vertices.index { |v| v.value == start_val }
     to = vertices.index { |v| v.value == end_val}
-    vertices[from].neighbors[to] = true
-    if undirected
-      vertices[to].neighbors[from] = true
+    vertices[from].neighbors << end_val
+    if !directed
+      vertices[to].neighbors << start_val
     end
+  end
+
+  def create_graph_from_hash(hash, directed = true)
+    graph = Graph.new
+    hash.keys.each do |key|
+      graph.add_vertex(key)
+    end
+    hash.each do |key,value|
+      value.each do |neighbor|
+        graph.add_edge(key,neighbor, directed)
+      end
+    end
+    @vertices = graph.vertices
   end
 
   def count
     vertices.length
+  end
+
+  def to_s
+    @vertices.map { |vertex| vertex.to_s }
   end
 end

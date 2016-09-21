@@ -18,4 +18,8 @@ class Queue
   def is_empty?
     @queue.empty?
   end
+
+  def to_s
+    @queue.map{|el|el.to_s}
+  end
 end
