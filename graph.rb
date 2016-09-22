@@ -1,13 +1,20 @@
+require 'set'
+
 class Vertex
-  attr_accessor :value, :neighbors
+  attr_accessor :value, :neighbors, :state
 
   def initialize(value)
     @value = value
-    @neighbors = []
+    @neighbors = Set.new
+    @state = {
+      completed: false,
+      partial: false,
+      blank: true
+    }
   end
 
   def to_s
-    [@value]
+    [@neighbors]
   end
 end
 
