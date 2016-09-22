@@ -56,40 +56,53 @@ end
            6
 =end
 
-def build_BST(array, left=0, right=array.length-1)
+def build_BT(array, left=0, right=array.length-1)
   return if left > right
   index_mid = left + (right-left) / 2
   node = Vertex.new(array[index_mid])
-  node.neighbors[0] = build_BST(array,left, index_mid - 1)
-  node.neighbors[1] = build_BST(array,index_mid + 1, right)
+  node.neighbors << build_BT(array,left, index_mid - 1)
+  node.neighbors << build_BT(array,index_mid + 1, right)
   node
 end
 
-# p build_BST([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+# p build_BT([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 
 # Given a binary tree, design an algorithm which creates a linked list of all
 # the nodes at each depth (i.e., if you have a tree with depth D, you'll have
 # D linked lists)
 
-def BST_depth_to_linked_list(array)
-  bst = build_BST(array)
+def flatten_search_tree(tree,show_values = false)
   visited = Hash.new(false)
   values = []
   queue = Queue.new
-  queue.enqueue(bst)
-  values << bst.value
+  queue.enqueue(tree)
+  if show_values
+    values << tree.value
+  else
+    values << tree
+  end
   until queue.is_empty?
     node = queue.dequeue
     unless visited[node.value]
       node.neighbors.each do |neighbor|
         if neighbor
-          values << neighbor.value
+          if show_values
+            values << neighbor.value
+          else
+            values << neighbor
+          end
           queue.enqueue(neighbor)
         end
       end
     end
     visited[node.value] = true
   end
+  values
+end
+
+def BST_depth_to_linked_list(array)
+  bst = build_BT(array)
+  values = flatten_search_tree(bst,true)
   linked_lists = [LinkedList.new]
   depth = 1
   values.each_with_index do |val, idx|
@@ -144,7 +157,7 @@ def get_height(node)
   return [get_height(node.neighbors[0]),get_height(node.neighbors[1])].max + 1
 end
 
-# tree = build_BST([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18])
+# tree = build_BT([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18])
 # p balanced_search_tree?(tree)
 
 # Build order: you are given a list of projects and a list of dependences, which
@@ -206,4 +219,34 @@ def build_tree(projects, dependencies)
   [graph,free_projects]
 end
 
-p find_build_order([:a,:b,:c,:d,:e,:f],[[:a,:d],[:f,:b],[:b,:d],[:f,:a],[:d,:c]])
+# p find_build_order([:a,:b,:c,:d,:e,:f],[[:a,:d],[:f,:b],[:b,:d],[:f,:a],[:d,:c]])
+
+# 4.8 Design an algorithm and write code to find the first common ancestor of
+# two nodes in a binary tree (not necessarily BST).
+
+def find_ancestors(binary_tree,node1,node2)
+  common_ancestor = nil
+  flattened = flatten_search_tree(binary_tree)
+  flattened.each do |node|
+    if find_target(node, node1,[node]) &&
+      find_target(node, node2,[node])
+      common_ancestor = node
+    end
+  end
+  common_ancestor.value
+end
+
+def find_target(node,target,path)
+  return path if path.include?(target)
+  return nil unless node
+  node.neighbors.each do |project|
+    path << project.value if project
+    result = find_target(project,target,path)
+    return result unless result.nil?
+  end
+  nil
+end
+
+# vertices = [:a,:r,:e,:u,:i,:o,:u,:y,:t,:s,:q,:p]
+# binary_tree = build_BT(vertices)
+# p find_ancestors(binary_tree,:u,:a)
