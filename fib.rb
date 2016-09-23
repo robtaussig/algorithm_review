@@ -5,7 +5,7 @@ fib[0] = 0
 fib[1] = 1
 
 Benchmark.bmbm do |x|
-	x.report('fib') { fib[100] }
+	x.report('fib') { fib[3000] }
 end
 
 =begin
