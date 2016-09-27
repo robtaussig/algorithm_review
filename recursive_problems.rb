@@ -115,37 +115,5 @@ end
 
 # p multiply_nums(3,17,1,0)
 
-def tower_of_hanoi_solver(stacks = [[3,2,1],[],[]])
-  highest_val = stacks[0].max
-  num_disks = stacks[0].length
-  if highest_val % 2 == 0
-    destination = 1
-    reserve = 2
-  else
-    destination = 2
-    reserve = 1
-  end
-  current = 0
-  until stacks[2].length == num_disks
-    # debugger
-    if stacks[current].length == num_disks
-      stacks[destination] << stacks[current].pop
-      stacks[reserve] << stacks[current].pop
-      stacks[reserve] << stacks[destination].pop
-    elsif stacks[current].length.between?(1,num_disks)
-      stacks[destination] << stacks[current].pop
-      if stacks[current].length > 0
-        destination,current = current,destination
-      end
-    else
-      stacks[current] << stacks[reserve].pop
-      stacks[destination] << stacks[reserve].pop
-      stacks[destination] << stacks[current].pop
-      destination = destination === 1 ? 2 : 1
-      reserve = reserve === 1 ? 2 : 1
-    end
-  end
-  stacks
-end
-
-p tower_of_hanoi_solver([[4,3,2,1],[],[]])
+# Write a method to compute all permutations of a string of unique characters
+# without dups
