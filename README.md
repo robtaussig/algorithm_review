@@ -19,9 +19,9 @@ In this repository you will find my implementation of several popular algorithms
 
 ## Data Structures
 
-- [Stack (class)](https://github.com/robtaussig/algorithm_review/blob/master/stack.rb)
-- [Queues (class)](https://github.com/robtaussig/algorithm_review/blob/master/queue.rb)
-- [Linked List (class)](https://github.com/robtaussig/algorithm_review/blob/master/linked_list.rb)
+- [Stack](https://github.com/robtaussig/algorithm_review/blob/master/stack.rb)
+- [Queues](https://github.com/robtaussig/algorithm_review/blob/master/queue.rb)
+- [Linked List](https://github.com/robtaussig/algorithm_review/blob/master/linked_list.rb)
 - [Graph](https://github.com/robtaussig/algorithm_review/blob/master/graph.rb)
 - [Binary Search Tree](https://github.com/robtaussig/algorithm_review/blob/master/binary_search_tree.rb)
 - [Bit Set](https://github.com/robtaussig/algorithm_review/blob/master/bit_set.rb)
