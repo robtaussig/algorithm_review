@@ -1,4 +1,5 @@
 require 'byebug'
+require_relative 'bit_set'
 
 # 10.1 You are given two sorted arrays, A and Bm where A has a large enough
 # buffer at the end to hold B. Write a method to merge B into A in sorted order.
@@ -53,4 +54,77 @@ def sort_array(array)
   sort_array(left) + [pivot] + sort_array(right)
 end
 
-p anagram_grouper(['hello', 'looeh', 'robert', 'joey', 'bugger', 'trebor', 'oeyj', 'olohe'])
+# p anagram_grouper(['hello', 'looeh', 'robert', 'joey', 'bugger', 'trebor', 'oeyj', 'olohe'])
+
+# 10.4 Sorted search, no size. You are given an array-like data structure Listy
+# which lacks a size method, but can return an element at index(i) in O(1) time.
+# If (i) is beyond the bounds of the data structure, it returns -1. Given a
+# Listy with sorted, positive integers, find the index at which an element X
+# occurs. If it occurs multiple times, return any index.
+
+class Listy
+  def initialize(array)
+    @listy = array
+  end
+
+  def elementAt(i)
+    return -1 unless i < @listy.length
+    @listy[i]
+  end
+end
+
+def find_element(target,arr)
+  listy = Listy.new(arr)
+  probeIdx = 1
+  until listy.elementAt(probeIdx * 2) == -1
+    probeIdx *= 2
+  end
+  initialProbe = probeIdx
+  until listy.elementAt(probeIdx) == target
+    if target > listy.elementAt(probeIdx)
+      if listy.elementAt(probeIdx * 1.5) == -1
+        return - 1 if listy.elementAt(probeIdx + 1) == -1
+        probeIdx += 1
+      else
+        probeIdx = (probeIdx * 1.5).round
+        return - 1 if probeIdx == initialProbe
+      end
+    elsif target < listy.elementAt(probeIdx)
+       return - 1 if probeIdx == 0
+      probeIdx /= 2
+    end
+  end
+  if listy.elementAt(probeIdx) == target
+    probeIdx
+  else
+    -1
+  end
+end
+
+array = [1,4,6,8,9,10,13,15,17,19,22,25,29]
+
+# p find_element(25,array)
+
+# 10.8 You have an array with all numbers from 1 to N, where N is at most
+# 32,000. The array may have duplicate entries, and you do not know what N is.
+# With only 4kilobytes of memory available, how would you print all duplicate
+# elements in the array?
+
+def print_duplicates(array)
+  bit_set = BitSet.new(32000)
+  # debugger
+  duplicates = []
+  array.each do |el|
+    if bit_set[el] == 1
+      duplicates << el
+    end
+    bit_set.on(el)
+  end
+  duplicates
+end
+
+# array = (1...32000).to_a.map { |el| rand(el) }
+
+# p print_duplicates(array)
+
+# 
