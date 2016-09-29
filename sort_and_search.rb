@@ -1,5 +1,6 @@
 require 'byebug'
 require_relative 'bit_set'
+require_relative 'binary_search_tree'
 
 # 10.1 You are given two sorted arrays, A and Bm where A has a large enough
 # buffer at the end to hold B. Write a method to merge B into A in sorted order.
@@ -127,4 +128,73 @@ end
 
 # p print_duplicates(array)
 
-# 
+# 10.9 Given an M x N matrix in which each row and each column is sorted in
+# ascending order, write a method to find an element
+
+def find_element_in_sorted_matrix(target,matrix)
+  x_probe = matrix[0].length / 2
+  y_probe = matrix.length / 2
+  count = 0
+  until matrix[y_probe][x_probe][0] == target
+    probed_vertex = matrix[y_probe][x_probe][0]
+    if probed_vertex > target
+      x_probe /= 2
+      if matrix[y_probe][0][0] > target
+        y_probe /= 2
+      else
+        y_probe += (matrix.length - y_probe) / 2
+      end
+      if x_probe < matrix[0].length - 1 && matrix[y_probe][x_probe + 1][0] == target
+        x_probe += 1
+      elsif y_probe < matrix.length - 1 && matrix[y_probe + 1][x_probe][0] == target
+        y_probe += 1
+      elsif x_probe > 0 && matrix[y_probe][x_probe - 1][0] == target
+        x_probe -= 1
+      elsif y_probe > 0 && matrix[y_probe - 1][x_probe][0] == target
+        y_probe -= 1
+      end
+    elsif probed_vertex < target
+      x_probe += (matrix[0].length - x_probe) / 2
+      if matrix[y_probe][0][0] > target
+        y_probe /= 2
+      else
+        y_probe += (matrix.length - y_probe) / 2
+      end
+      if x_probe < matrix[0].length - 1 && matrix[y_probe][x_probe + 1][0] == target
+        x_probe += 1
+      elsif y_probe < matrix.length - 1 && matrix[y_probe + 1][x_probe][0] == target
+        y_probe += 1
+      elsif x_probe > 0 && matrix[y_probe][x_probe - 1][0] == target
+        x_probe -= 1
+      elsif y_probe > 0 && matrix[y_probe - 1][x_probe][0] == target
+        y_probe -= 1
+      end
+    end
+    if y_probe * x_probe == 0 || y_probe == matrix.length || x_probe == matrix[0].length
+      if matrix[y_probe][x_probe][0] == target
+        return y_probe,x_probe
+      else
+        return nil
+      end
+    end
+  end
+  return x_probe, y_probe
+end
+
+# matrix = [
+#   [[3], [4], [5], [6], [7], [8]],
+#   [[5], [7], [9], [13],[14],[16]],
+#   [[7], [8], [10],[14],[15],[17]],
+#   [[9], [13],[14],[15],[17],[18]],
+#   [[11],[18],[19],[21],[22],[23]],
+#   [[12],[19],[20],[23],[24],[25]],
+# ]
+#
+# find_element_in_sorted_matrix(4,matrix)
+
+# 10.10 Imagine reading a stream of integers. Periodically, you wish to be able
+# to look up the rank of a number, measured by how many numbers of values less
+# or equal to it. Implement a data structure for this.
+
+tree = BinarySearchTree.new([5,2,3,1,7,9,6,10])
+p tree
