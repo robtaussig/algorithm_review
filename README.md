@@ -23,6 +23,8 @@ In this repository you will find my implementation of several popular algorithms
 - [Queues (class)](https://github.com/robtaussig/algorithm_review/blob/master/queue.rb)
 - [Linked List (class)](https://github.com/robtaussig/algorithm_review/blob/master/linked_list.rb)
 - [Graph](https://github.com/robtaussig/algorithm_review/blob/master/graph.rb)
+- [Binary Search Tree](https://github.com/robtaussig/algorithm_review/blob/master/binary_search_tree.rb)
+- [Bit Set](https://github.com/robtaussig/algorithm_review/blob/master/bit_set.rb)
 
 ## Problems
 
@@ -31,3 +33,5 @@ In this repository you will find my implementation of several popular algorithms
 - [LinkedLists](https://github.com/robtaussig/algorithm_review/blob/master/linked_list_questions.rb)
 - [Trees, Tries and Graphs](https://github.com/robtaussig/algorithm_review/blob/master/tree_graph_questions.rb)
 - [Math Puzzles](https://github.com/robtaussig/algorithm_review/blob/master/math_puzzles.rb)
+- [Sort and Search](https://github.com/robtaussig/algorithm_review/blob/master/sort_and_search.rb)
+- [Recursion](https://github.com/robtaussig/algorithm_review/blob/master/recursive_problems.rb)
