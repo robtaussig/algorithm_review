@@ -4,8 +4,28 @@ fib = Hash.new{ |cache,n| cache[n] = fib[n - 1] + fib[n - 2]}
 fib[0] = 0
 fib[1] = 1
 
+def fibs_iter(n)
+ if n == 0 || n == 1
+   return n
+ end
+
+ prev_prev = 0
+ prev = 1
+ i = 2
+
+ while i <= n
+   current = prev_prev + prev
+   prev_prev = prev;
+   prev = current;
+	 i += 1
+ end
+
+ return current;
+end
+
 Benchmark.bmbm do |x|
 	x.report('fib') { fib[3000] }
+	x.report('fibs_iter') { fibs_iter(3000) }
 end
 
 =begin

@@ -22,7 +22,7 @@ def radix_sort(array)
 end
 
 
-list = Array.new(1000000).map{|i| rand(1000)}
-Benchmark.bmbm do |x|
-	x.report('radix_sort') { radix_sort(list) }
-end
+# list = Array.new(1000000).map{|i| rand(1000)}
+# Benchmark.bmbm do |x|
+# 	x.report('radix_sort') { radix_sort(list) }
+# end

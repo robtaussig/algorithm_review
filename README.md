@@ -15,7 +15,7 @@ In this repository you will find my implementation of several popular algorithms
 - [Depth First Search](https://github.com/robtaussig/algorithm_review/blob/master/depth_first_search.rb)
 - [Breadth First Search](https://github.com/robtaussig/algorithm_review/blob/master/breadth_first_search.rb)
 - [Binary Search](https://github.com/robtaussig/algorithm_review/blob/master/binary_search.rb)
-- [Fibonacci Search](https://github.com/robtaussig/algorithm_review/blob/master/fib.rb) - (I particularly love this implementation, using just a hash)
+- [Fibonacci Search](https://github.com/robtaussig/algorithm_review/blob/master/fib.rb)
 
 ## Data Structures
 

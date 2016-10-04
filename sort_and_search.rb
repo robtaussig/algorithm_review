@@ -1,6 +1,7 @@
 require 'byebug'
 require_relative 'bit_set'
 require_relative 'binary_search_tree'
+require_relative 'radix_sort'
 
 # 10.1 You are given two sorted arrays, A and Bm where A has a large enough
 # buffer at the end to hold B. Write a method to merge B into A in sorted order.
@@ -196,5 +197,56 @@ end
 # to look up the rank of a number, measured by how many numbers of values less
 # or equal to it. Implement a data structure for this.
 
-tree = BinarySearchTree.new([5,2,3,1,7,9,6,10])
-p tree
+def rank_from_stream(target, arr)
+  sorted = radix_sort(arr)
+  i = 1
+  until sorted[arr.length - i] == target
+    i += 1
+  end
+  arr.length - i
+end
+
+# p rank_from_stream(5,[5,1,4,4,5,9,7,13,3])
+
+# 10.11 In an array of integers, a peak is an element which is greatner than or
+# equal to the adjacent integers and a valley is an element which is less than
+# or equal to the adjacent integers. Given an array of integers, sort the array
+# into an alternating sequence of peaks and valleys.
+
+def peaks_and_valleys(arr)
+  result = Array.new(arr.length)
+  sorted = radix_sort(arr)
+  i = 0
+  until i == arr.length / 2
+    result[i * 2 + 1] = sorted[sorted.length - i - 1]
+    result[i * 2] = sorted[i]
+    i += 1
+  end
+  if sorted.length % 2 == 1
+    result[i * 2] = sorted[i]
+  end
+  result
+end
+
+# p peaks_and_valleys([4,2,3,6,3,4,2,1,5,7,9,11,53,18,2])
+
+# 10.11(b) Now do the above problem in O(n) time (not O(n log n))
+
+def peaks_and_valleys2(arr)
+  i = 1
+  while i < arr.length - 1
+    if arr[i] >= arr[i - 1] && arr[i] >= arr[i + 1]
+      i += 2
+    else
+      if arr[i - 1] > arr[i + 1]
+        arr[i], arr[i - 1] = arr[i - 1], arr[i]
+      else
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
+      end
+      i += 2
+    end
+  end
+  arr
+end
+
+p peaks_and_valleys2((1...20).to_a.map { |el| rand(el) })
