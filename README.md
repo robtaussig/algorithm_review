@@ -25,7 +25,7 @@ In this repository you will find my implementation of several popular algorithms
 - [Graph](https://github.com/robtaussig/algorithm_review/blob/master/graph.rb)
 - [Binary Search Tree](https://github.com/robtaussig/algorithm_review/blob/master/binary_search_tree.rb)
 - [Bit Set](https://github.com/robtaussig/algorithm_review/blob/master/bit_set.rb)
-- [Heap]((https://github.com/robtaussig/algorithm_review/blob/master/heap.rb))
+- [Heap](https://github.com/robtaussig/algorithm_review/blob/master/heap.rb)
 
 ## Problems
 
