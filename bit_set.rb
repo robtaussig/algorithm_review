@@ -40,6 +40,10 @@ class BitSet
     end
   end
 
+  def length
+    @map.length
+  end
+
   def to_s
     @map.join('')
   end
