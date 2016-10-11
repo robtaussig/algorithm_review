@@ -57,3 +57,32 @@ def find_intersection(line1, line2)
 end
 
 # p find_intersection([[0,0],[5,9]],[[4,0],[-2,7]])
+
+# 16.4 Design an algorithm to figure out if someone has won a game of tic-tac-toe
+
+grid = [
+          ["X"],["O"],["O"],
+          ["X"],["X"],["O"],
+          ["O"],["X"],["O"]
+        ]
+
+def find_winner(grid)
+  i = 0
+  winner_hash = Hash.new("")
+  hor_mod = 0
+  vert_mod = 3
+  diag_mod = 0
+  while i < 3
+    winner_hash[["hor",i]] = grid[i*3][0] + grid[i*3 + 1][0] + grid[i*3 + 2][0]
+    winner_hash[["vert",i]] = grid[i][0] + grid[i+3][0] + grid[i+6][0]
+    if i != 1
+      winner_hash[["diag",i]] = grid[i][0] + grid[4][0] + grid[8 - i][0]
+    end
+    i += 1
+  end
+  return "X wins!" if winner_hash.values.any? {|val| val == "XXX"}
+  return "O wins!" if winner_hash.values.any? {|val| val == "OOO"}
+  return "tie!"
+end
+
+p find_winner(grid)
