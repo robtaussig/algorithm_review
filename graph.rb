@@ -6,24 +6,12 @@ class Vertex
   def initialize(value)
     @value = value
     @neighbors = Set.new
-    # @state = {
-    #   completed: false,
-    #   partial: false,
-    #   blank: true
-    # }
   end
 
   def to_s
     [@neighbors]
   end
 
-  # def find_neighbor(value)
-  #   @neighbors.each do |neighbor|
-  #     if @neighbor.value == value
-  #       return neighbor
-  #     end
-  #   end
-  # end
 end
 
 class Graph
