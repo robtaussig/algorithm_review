@@ -231,4 +231,50 @@ end
 # p calc(80,"divide", 15)
 
 # 16.10 - Living People: Given a list of people with their birth and death years
-# implement a method to compute the year with teh most number of people alive
+# implement a method to compute the year with teh most number of people alive.
+# You may assume that all people were born between 1900 and 2000 (inclusive).
+# You can assume that if someone was alive during any portion of that year, they
+# should be included in that year's count.
+
+#[[1900,1940], [1935,1950], [1911,1936], [1933,1987]]
+
+def living_people_by_year(list)
+	sorted_births = list.sort_by {|a| a[0]}.map {|el| el[0]}
+	sorted_deaths = list.sort_by {|a| a[1]}.map {|el| el[1]}
+	living_hash = Hash.new(0)
+	living_count = 0
+	births_counted = 0
+	deaths_counted = 0
+	i = sorted_births.first
+	until i == sorted_deaths.last
+		if sorted_births[births_counted] == i
+			j = 0
+			until sorted_births[births_counted + j] != i
+				living_count += 1
+				births_counted += 1
+				j += 1
+			end
+		end
+		living_hash[i] = living_count
+		if sorted_deaths[deaths_counted] == i
+			j = 0
+			until sorted_deaths[deaths_counted + j] != i
+				living_count -= 1
+				deaths_counted += 1
+				j += 1
+			end
+		end
+		i+= 1
+	end
+	highest_val = 0
+	highest_year = living_hash[0]
+	living_hash.each do |key,val|
+		if val > highest_val
+			highest_year = key
+			highest_val = val
+		end
+	end
+	highest_year
+end
+# list = [[1900,1940], [1935,1950], [1911,1936], [1933,1987]]
+# p living_people_by_year(list)
