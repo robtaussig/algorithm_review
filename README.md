@@ -35,3 +35,4 @@ In this repository you will find my implementation of several popular algorithms
 - [Math Puzzles](https://github.com/robtaussig/algorithm_review/blob/master/math_puzzles.rb)
 - [Sort and Search](https://github.com/robtaussig/algorithm_review/blob/master/sort_and_search.rb)
 - [Recursion](https://github.com/robtaussig/algorithm_review/blob/master/recursive_problems.rb)
+- [Moderate](https://github.com/robtaussig/algorithm_review/blob/master/moderate.rb)
