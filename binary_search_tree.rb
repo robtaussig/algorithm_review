@@ -1,6 +1,7 @@
 require_relative 'graph'
 
 class BinarySearchTree
+  attr_accessor :tree
   def initialize(array)
     @sorted = quicksort(array)
     @tree = Graph.new
