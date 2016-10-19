@@ -29,34 +29,34 @@ end
 
 # p stair_permutations(100)
 
-# 8.2 Imagine a robot sitting on the upper left corner of grid with r rows and
-# c columns. The robot can only move in two directions, right and down, but
-# certain cells are off limits such that the robot cannot step on them. Design
-# an algorithm to find a path for the robot from the top left to bottom right.
-X = 'bomb'
-grid = [
-  [[ ],[ ],[ ],[ ],[X],[ ],[X],[ ],[ ],[X]],
-  [[ ],[ ],[X],[ ],[ ],[ ],[ ],[X],[ ],[ ]],
-  [[X],[ ],[ ],[ ],[X],[ ],[ ],[X],[ ],[ ]],
-  [[ ],[X],[ ],[X],[X],[X],[X],[ ],[X],[ ]],
-  [[ ],[ ],[ ],[ ],[ ],[ ],[X],[ ],[X],[ ]],
-  [[ ],[X],[ ],[ ],[X],[ ],[ ],[ ],[ ],[X]],
-  [[ ],[ ],[X],[ ],[ ],[X],[ ],[ ],[ ],[ ]],
-  [[X],[ ],[ ],[X],[ ],[ ],[X],[X],[ ],[ ]],
-  [[ ],[ ],[ ],[ ],[X],[ ],[X],[ ],[ ],[ ]],
-  [[ ],[ ],[X],[ ],[ ],[ ],[ ],[X],[ ],[ ]],
-]
+  # 8.2 Imagine a robot sitting on the upper left corner of grid with r rows 
+  #and c columns. The robot can only move in two directions, right and down, but
+  # certain cells are off limits such that the robot cannot step on them. Design
+  # an algorithm to find a path for the robot from the top left to bottom right.
+  X = 'bomb'
+  grid = [
+    [[ ],[ ],[ ],[ ],[X],[ ],[X],[ ],[ ],[X]],
+    [[ ],[ ],[X],[ ],[ ],[ ],[ ],[X],[ ],[ ]],
+    [[X],[ ],[ ],[ ],[X],[ ],[ ],[X],[ ],[ ]],
+    [[ ],[X],[ ],[X],[X],[X],[X],[ ],[X],[ ]],
+    [[ ],[ ],[ ],[ ],[ ],[ ],[X],[ ],[X],[ ]],
+    [[ ],[X],[ ],[ ],[X],[ ],[ ],[ ],[ ],[X]],
+    [[ ],[ ],[X],[ ],[ ],[X],[ ],[ ],[ ],[ ]],
+    [[X],[ ],[ ],[X],[ ],[ ],[X],[X],[ ],[ ]],
+    [[ ],[ ],[ ],[ ],[X],[ ],[X],[ ],[ ],[ ]],
+    [[ ],[ ],[X],[ ],[ ],[ ],[ ],[X],[ ],[ ]],
+  ]
 
-def grid_robot(grid)
-  grid_hash = Hash.new([])
-  x = grid.length
-  y = grid[0].length
-  x.times do |x_pos|
-    y.times do |y_pos|
-      grid_hash[[x_pos,y_pos]] = []
+  def grid_robot(grid)
+    grid_hash = Hash.new([])
+    x = grid.length
+    y = grid[0].length
+    x.times do |x_pos|
+      y.times do |y_pos|
+        grid_hash[[x_pos,y_pos]] = []
+      end
     end
-  end
-  grid_hash.each do |key,_|
+    grid_hash.each do |key,_|
     x = key[0]
     y = key[1]
     if grid[x][y].empty?
