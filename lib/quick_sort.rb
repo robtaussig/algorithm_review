@@ -15,7 +15,7 @@ end
 
 def partition(arr,left,right)
   mid = left + (right - left) / 2
-  while left < right - 2 do
+  while left < right - 1 do
     while arr[left] < arr[mid] do
       left += 1
     end
